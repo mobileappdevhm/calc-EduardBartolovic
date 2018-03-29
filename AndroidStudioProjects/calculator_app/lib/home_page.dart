@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:math_expression/math_expression.dart';
 
 class HomePage extends StatefulWidget{
   @override
@@ -11,52 +12,28 @@ class HomePageState extends State<HomePage>{
 
   var num1 = 0.0 ,num2 = 0.0 ,sum = 0.0 ;
 
-  final TextEditingController t1 = new TextEditingController(text: '0');
-  final TextEditingController t2 = new TextEditingController(text: '0');
+  final TextEditingController text = new TextEditingController(text: '');
 
 
-  void addition(){
+  void doMath(){
     this.setState((){
-      num1= double.parse(t1.text);
-      num2= double.parse(t2.text);
+      //Parser parser = new Parser();
 
-      sum = num1 + num2;
+      text.text = "hall";
     });
   }
 
-  void subtraction(){
+  void addElement(String element){
     this.setState((){
-      num1= double.parse(t1.text);
-      num2= double.parse(t2.text);
-
-      sum = num1 - num2;
+      text.text += element;
     });
   }
-
-  void multiplication(){
-    this.setState((){
-      num1= double.parse(t1.text);
-      num2= double.parse(t2.text);
-
-      sum = num1 * num2;
-    });
-  }
-
-  void division(){
-    this.setState((){
-      num1= double.parse(t1.text);
-      num2= double.parse(t2.text);
-
-      sum = num1 / num2;
-    });
-  }
-
   void clear(){
     this.setState((){
-      t1.text = '0';
-      t2.text = '0';
+      text.text = "";
     });
   }
+
 
   @override
   Widget build(BuildContext context){
@@ -74,30 +51,107 @@ class HomePageState extends State<HomePage>{
                 ),
               ),
               new TextField(
-                keyboardType: TextInputType.number,
                 decoration: new InputDecoration( hintText: 'Enter Number'),
-                controller: t1,
+                controller: text,
               ),
-              new TextField(
-                keyboardType: TextInputType.number,
-                decoration: new InputDecoration( hintText: 'Enter Number'),
-                controller: t2,
+              new Padding(
+                padding: const EdgeInsets.only(top:15.0),
+              ),
+              new MaterialButton(
+                child: new Text('!'),
+                color: Colors.yellow,
+                onPressed: doMath,
               ),
               new Padding(
                 padding: const EdgeInsets.only(top:15.0),
               ),
               new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
+                  new MaterialButton(
+                    child: new Text('1'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("1"),
+                  ),
+                  new MaterialButton(
+                    child: new Text('2'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("2"),
+                  ),
+                  new MaterialButton(
+                    child: new Text('3'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("3"),
+                  ),
+                ],
+              ),
+              new Padding(
+                padding: const EdgeInsets.only(top:10.0),
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  new MaterialButton(
+                    child: new Text('4'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("4"),
+                  ),
+                  new MaterialButton(
+                    child: new Text('5'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("5"),
+                  ),
+                  new MaterialButton(
+                    child: new Text('6'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("6"),
+                  ),
+                ],
+              ),
+              new Padding(
+                padding: const EdgeInsets.only(top:10.0),
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  new MaterialButton(
+                    child: new Text('7'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("7"),
+                  ),
+                  new MaterialButton(
+                    child: new Text('8'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("8"),
+                  ),
+                  new MaterialButton(
+                    child: new Text('9'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("9"),
+                  ),
+
+                ],
+              ),
+              new Padding(
+                padding: const EdgeInsets.only(top:10.0),
+              ),
+              new Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: <Widget>[
+                  new MaterialButton(
+                    child: new Text('0'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("0"),
+                  ),
                   new MaterialButton(
                     child: new Text('+'),
                     color: Colors.yellow,
-                    onPressed: addition,
+                    onPressed: () => addElement("+"),
                   ),
                   new MaterialButton(
                     child: new Text('-'),
                     color: Colors.yellow,
-                    onPressed: subtraction,
+                    onPressed: () => addElement("-"),
                   ),
                 ],
               ),
@@ -105,33 +159,25 @@ class HomePageState extends State<HomePage>{
                 padding: const EdgeInsets.only(top:10.0),
               ),
               new Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
-                  new MaterialButton(
-                    child: new Text('*'),
-                    color: Colors.yellow,
-                    onPressed: multiplication,
-                  ),
                   new MaterialButton(
                     child: new Text('/'),
                     color: Colors.yellow,
-                    onPressed: division,
+                    onPressed: () => addElement("/"),
                   ),
-                ],
-              ),
-              new Padding(
-                padding: const EdgeInsets.only(top:10.0),
-              ),
-              new Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
                   new MaterialButton(
-                    child: new Text('reset'),
-                    color: Colors.red,
+                    child: new Text('*'),
+                    color: Colors.yellow,
+                    onPressed: () => addElement("*"),
+                  ),
+                  new MaterialButton(
+                    child: new Text('X'),
+                    color: Colors.yellow,
                     onPressed: clear,
                   ),
                 ],
-              )
+              ),
             ],
           ),
       ),
