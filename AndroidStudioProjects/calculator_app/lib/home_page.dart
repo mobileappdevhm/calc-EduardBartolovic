@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:math_expression/math_expression.dart';
+import 'package:math_expressions/math_expressions.dart';
 
 class HomePage extends StatefulWidget{
   @override
@@ -10,27 +10,31 @@ class HomePage extends StatefulWidget{
 
 class HomePageState extends State<HomePage>{
 
-  var num1 = 0.0 ,num2 = 0.0 ,sum = 0.0 ;
-
-  final TextEditingController text = new TextEditingController(text: '');
-
+  var sum = 0.0 ;
+  String text = "";
 
   void doMath(){
     this.setState((){
-      //Parser parser = new Parser();
+      try{
+        Parser p = new Parser();
+        Expression exp = p.parse(text);
+        final double result = exp.evaluate(EvaluationType.REAL,new ContextModel());
+        text = "$result";
+      }catch(exe){ // if userinpur was wrong
+        text = "Syntax Error";
+      }
 
-      text.text = "hall";
     });
   }
 
   void addElement(String element){
     this.setState((){
-      text.text += element;
+      text += element;
     });
   }
   void clear(){
     this.setState((){
-      text.text = "";
+      text = "";
     });
   }
 
@@ -44,21 +48,17 @@ class HomePageState extends State<HomePage>{
           child: new Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              new Text('Output: $sum ',
+              new Text('$text ',
                 style: new TextStyle( fontSize: 20.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.purple,
                 ),
               ),
-              new TextField(
-                decoration: new InputDecoration( hintText: 'Enter Number'),
-                controller: text,
-              ),
               new Padding(
                 padding: const EdgeInsets.only(top:15.0),
               ),
               new MaterialButton(
-                child: new Text('!'),
+                child: new Text('='),
                 color: Colors.yellow,
                 onPressed: doMath,
               ),
@@ -172,8 +172,8 @@ class HomePageState extends State<HomePage>{
                     onPressed: () => addElement("*"),
                   ),
                   new MaterialButton(
-                    child: new Text('X'),
-                    color: Colors.yellow,
+                    child: new Text('CLEAR'),
+                    color: Colors.red,
                     onPressed: clear,
                   ),
                 ],
