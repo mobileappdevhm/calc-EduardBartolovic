@@ -9,8 +9,7 @@ class HomePage extends StatefulWidget{
 
 
 class HomePageState extends State<HomePage>{
-
-  var sum = 0.0 ;
+  
   String text = "";
 
   void doMath(){
